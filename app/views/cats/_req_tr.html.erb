@@ -4,9 +4,11 @@
   <td>
     <% if req.pending? %>
       <form action="<%= approve_cat_rental_request_url(req) %>" method="POST">
+        <%= auth_token %>
         <input type="submit" value="Approve" />
       </form>
       <form action="<%= deny_cat_rental_request_url(req) %>" method="POST">
+        <%= auth_token %>
         <input type="submit" value="Deny" />
       </form>
     <% else %>
