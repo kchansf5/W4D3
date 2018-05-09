@@ -1,0 +1,15 @@
+<!-- button -->
+<!-- actionurl -->
+
+<% button_text = type == :sign_up ? "Submit" : "Login" %>
+<% action_url = type == :sign_up ? users_url : session_url %>
+
+<form action="<%= action_url %>" method="post">
+  <label for="username">Username: </label>
+  <input type="text" id="username" name="user[username]">
+
+  <label for="password">Password: </label>
+  <input type="password" id="password" name="user[password]">
+
+  <input type="submit" value= <%= button_text %> >
+</form>
