@@ -25,7 +25,7 @@
       <th>Status</th>
       <th>Renter Name</th>
     </tr>
-    <% @cat.rental_requests.order('start_date').each do |req| %>
+    <% @cat.rental_requests.includes(:user).order('start_date').each do |req| %>
       <%= render 'req_tr', req: req %>
     <% end %>
   </table>
