@@ -10,6 +10,7 @@
 #  description :text
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  user_id     :integer          not null
 #
 
 require 'action_view'
@@ -19,8 +20,8 @@ class Cat < ApplicationRecord
 
   # freeze ensures that constants are immutable
   CAT_COLORS = %w(black white orange brown).freeze
-  
-  validates :birth_date, :color, :name, :sex, presence: true
+
+  validates :birth_date, :user_id, :color, :name, :sex, presence: true
   validates :color, inclusion: CAT_COLORS
   validates :sex, inclusion: %w(M F)
 
@@ -31,4 +32,9 @@ class Cat < ApplicationRecord
   def age
     time_ago_in_words(birth_date)
   end
+
+  belongs_to :owner,
+  primary_key: :id,
+  foreign_key: :user_id,
+  class_name: :User
 end

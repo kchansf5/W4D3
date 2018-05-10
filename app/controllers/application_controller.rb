@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  helper_method :current_user, :logged_in?
+  helper_method :current_user, :logged_in?, :not_owner?, :owner?
 
   def current_user
     return nil if session[:session_token] == nil
@@ -28,6 +28,14 @@ class ApplicationController < ActionController::Base
 
   def require_log_in
     redirect_to new_session_url unless logged_in?
+  end
+
+  def not_owner?(id = params[:id])
+    current_user.cats.where(id: id).empty?
+  end
+
+  def owner?
+    !not_owner?
   end
 
 end
