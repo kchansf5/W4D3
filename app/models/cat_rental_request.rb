@@ -9,6 +9,7 @@
 #  status     :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  user_id    :integer          not null
 #
 
 class CatRentalRequest < ApplicationRecord
@@ -23,6 +24,8 @@ class CatRentalRequest < ApplicationRecord
   validate :does_not_overlap_approved_request
 
   belongs_to :cat
+
+  belongs_to :user
 
   after_initialize :assign_pending_status
 
